@@ -1,3 +1,3 @@
 # NFT GALLERY
 
-This is the simple gallery which shows the nft based on their public address in cool UI
+This is the simple gallery which shows users their nft based on their public address in cool UI
