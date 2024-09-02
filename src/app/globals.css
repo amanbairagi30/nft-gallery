@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -60,11 +61,54 @@
   }
 }
 
+.swiper {
+  width: 100%;
+  padding-top: 20px;
+  padding-bottom: 50px;
+  height: 70vh;
+}
+
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+  width: 300px;
+  height: 300px;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  background-color: #f7f7f7;
+}
+
+.myswiper {
+  height: 70vh;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.photos {
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 300px;
+  margin-right: 0;
+  -webkit-box-reflect: below 0.01px linear-gradient(transparent, transparent, #0006);
+  border-radius: 10px;
+  border: rgb(64, 67, 62) solid 3px;
+}
+
 
 @layer base {
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }

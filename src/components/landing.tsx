@@ -34,7 +34,7 @@ const sectionVariants = {
 export default function Landing() {
     return (
         <div className='h-screen overflow-hidden'>
-            <div className="relative flex h-full w-full flex-col overflow-hidden rounded-lg  md:shadow-xl">
+            <div className="relative flex h-full w-full flex-col overflow-hidden">
                 <Navbar />
                 <RetroGrid />
                 <motion.main
@@ -43,7 +43,7 @@ export default function Landing() {
                     animate="visible"
                     variants={mainVariants}
                 >
-                    <motion.div className='max-w-[600px] flex items-center flex-col gap-4 mx-auto text-center' variants={childVariants}>
+                    <motion.div className='max-w-[600px] flex items-center flex-col gap-6 mx-auto text-center' variants={childVariants}>
                         <GithubButton />
                         <motion.div className='flex flex-col gap-4' variants={childVariants}>
                             <motion.div className='font-heading text-4xl font-bold' variants={childVariants}>
@@ -52,7 +52,7 @@ export default function Landing() {
                             <motion.p className='font-base' variants={childVariants}>
                                 Effortlessly explore and showcase your entire Solana NFT collection
                             </motion.p>
-                            <Input placeholder='Enter your public address' className='bg-background font-base z-4' />
+                            {/* <Input placeholder='Enter your public address' className='bg-background font-base z-4' /> */}
                         </motion.div>
                     </motion.div>
                     <motion.div
@@ -68,7 +68,7 @@ export default function Landing() {
                             },
                         }}
                     >
-                        <Button className='font-heading z-10 font-bold text-xs'>Fetch NFTs</Button>
+                        <Button onClick={()=>window.open('/gallery')} className='font-heading z-10 font-bold text-xs'>Get Started</Button>
                     </motion.div>
                 </motion.main>
 
