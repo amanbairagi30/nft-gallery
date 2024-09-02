@@ -33,12 +33,12 @@ const sectionVariants = {
 
 export default function Landing() {
     return (
-        <div className='h-screen'>
+        <div className='h-screen overflow-hidden'>
             <div className="relative flex h-full w-full flex-col overflow-hidden rounded-lg  md:shadow-xl">
                 <Navbar />
                 <RetroGrid />
                 <motion.main
-                    className='w-full flex flex-col gap-4 items-center justify-center absolute bottom-20 px-4'
+                    className='w-full flex flex-col gap-4 z-10 items-center justify-center absolute bottom-20 px-4'
                     initial="hidden"
                     animate="visible"
                     variants={mainVariants}
@@ -47,7 +47,7 @@ export default function Landing() {
                         <GithubButton />
                         <motion.div className='flex flex-col gap-4' variants={childVariants}>
                             <motion.div className='font-heading text-4xl font-bold' variants={childVariants}>
-                                Unleash the Power of Your NFTs with NFT Taiiki
+                                Unleash the Power of Your NFTs with NFT Zone
                             </motion.div>
                             <motion.p className='font-base' variants={childVariants}>
                                 Effortlessly explore and showcase your entire Solana NFT collection
@@ -56,6 +56,7 @@ export default function Landing() {
                         </motion.div>
                     </motion.div>
                     <motion.div
+                        className='z-10'
                         variants={{
                             hidden: { y: 100, opacity: 0 },
                             visible: {
@@ -67,18 +68,29 @@ export default function Landing() {
                             },
                         }}
                     >
-                        <Button className='font-heading font-bold text-xs'>Fetch NFTs</Button>
+                        <Button className='font-heading z-10 font-bold text-xs'>Fetch NFTs</Button>
                     </motion.div>
                 </motion.main>
 
                 <motion.section
-                    className='w-full font-base flex flex-col md:flex-row text-xs items-center justify-center absolute bottom-4 px-4'
+                    className='w-full z-10 font-base flex flex-col md:flex-row md:gap-1 text-xs items-center justify-center absolute bottom-4 px-4'
                     initial="hidden"
                     animate="visible"
                     variants={sectionVariants}
                 >
-                    Crafted at last moment by <Link className='hover:underline' href={'https://github.com/amanbairagi30'} target='_blank'>Aman Kumar Bairagi</Link>
+                    Crafted at last moment by <Link className='hover:underline font-bold' href={'https://github.com/amanbairagi30'} target='_blank'>Aman Kumar Bairagi</Link>
                 </motion.section>
+
+
+                <motion.div
+                    initial="hidden"
+                    animate="visible"
+                    variants={{
+                        hidden: { opacity: 0 },
+                        visible: { opacity: 0.8, transition: { duration: 1, ease: 'linear' } },
+                    }}
+                    className='absolute bg-[radial-gradient(50%_50%_at_50%_50%,#FFD70044_0%,#FFD70000_100%)] -bottom-[38rem] opacity-80 left-[50%] translate-x-[-50%] h-[50rem] w-[50rem]'>
+                </motion.div>
             </div>
 
         </div>

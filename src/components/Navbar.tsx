@@ -15,7 +15,7 @@ export default function Navbar() {
             <nav className=' h-full flex items-center justify-between p-4'>
                 <div className='flex items-center gap-2'>
                     <Image className='w-[1.5rem] h-[1.5rem]' src={NFT_LOGO} width={500} height={500} alt='nft_logo' />
-                    <h1 className='font-heading font-bold'>NFT Taiiki</h1>
+                    <h1 className='font-heading font-bold'>NFT Zone</h1>
                 </div>
                 <ThemeToggler />
             </nav>
