@@ -1,8 +1,21 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Poppins, Jura, Orbitron } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/components/theme-provider";
 
-const inter = Inter({ subsets: ["latin"] });
+const jura = Jura({
+  subsets: ['latin'],
+  variable: '--font-jura',
+  display: 'swap',
+  weight: ['400', '700'], // Add the weights you need
+});
+
+const orbitron = Orbitron({
+  subsets: ['latin'],
+  variable: '--font-orbitron-mono',
+  display: 'swap',
+  weight: ['400', '700'], // Add the weights you need
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,7 +29,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`${jura.variable} ${orbitron.variable}`}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
