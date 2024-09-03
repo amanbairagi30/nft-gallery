@@ -64,7 +64,7 @@ export default function GalleryPage() {
                 <CuboidIcon className="mx-auto h-12 w-12 text-muted" />
                 <h1 className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">No NFTs Available</h1>
                 <p className="mt-4 text-muted-foreground">
-                  We're sorry, but there are no NFTs available at this time. Please wnter wallet address and then fetch again.
+                  We&apos;re sorry, but there are no NFTs available at this time. Please wnter wallet address and then fetch again.
                 </p>
               </div>
             </div>
