@@ -47,7 +47,7 @@ export default function GalleryPage() {
 
   return (
     <main className="h-screen max-w-[1280px] mx-auto px-4 relative overflow-hidden w-full">
-      <h1 className="my-4 font-heading font-bold text-3xl">Gallery ({nfts.length})</h1>
+      <h1 className="my-4 font-heading font-bold text-3xl">NFT Gallery ({nfts.length})</h1>
       {
         nfts.length > 0 ? (
 
@@ -66,7 +66,7 @@ export default function GalleryPage() {
                 <CuboidIcon className="mx-auto h-12 w-12 text-muted" />
                 <h1 className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">No NFTs Available</h1>
                 <p className="mt-4 text-muted-foreground">
-                  We&apos;re sorry, but there are no NFTs available at this time. Please wnter wallet address and then fetch again.
+                  We&apos;re sorry, but there are no NFTs available at this time. Please enter valid solana public address and then fetch again.
                 </p>
               </div>
             </div>
