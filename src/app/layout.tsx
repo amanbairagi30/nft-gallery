@@ -3,6 +3,7 @@ import { Poppins, Jura, Orbitron } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
+import { Analytics } from "@vercel/analytics/react"
 
 const jura = Jura({
   subsets: ['latin'],
@@ -40,6 +41,7 @@ export default function RootLayout({
           {children}
           <Toaster position="top-right" />
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );

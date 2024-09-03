@@ -48,7 +48,7 @@ const GalleryComponent = ({ nfts }: { nfts: string[] }) => {
                     {nfts.length > 0 ? (
                         nfts.map((nftUrl, index) => (
                             <SwiperSlide key={index}>
-                                <img src={nftUrl} alt={`slide${index + 1}`} className="photos" />
+                                <img src={nftUrl} alt={`slide${index + 1}`} className="photos" loading="lazy" />
                             </SwiperSlide>
                         ))
                     ) : (

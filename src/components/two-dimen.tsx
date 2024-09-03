@@ -14,6 +14,7 @@ export default function TwoDView({ nfts }: { nfts: string[] }) {
                                 src={nftUrl}
                                 alt={`NFT ${index}`}
                                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 ease-in-out hover:scale-110"
+                                loading="lazy"
                             />
                         </div>
                     </div>
