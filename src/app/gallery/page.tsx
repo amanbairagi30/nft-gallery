@@ -8,43 +8,45 @@ import { CuboidIcon, Loader2, SquareChevronDownIcon } from "lucide-react"
 import { fetchNFTs } from "@/lib";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectGroup, SelectItem } from "@/components/ui/select"
 import TwoDView from "@/components/two-dimen";
+import { toast } from "sonner";
 
-
-// Loader component
-const Loader = () => (
-  <div className="flex justify-center items-center h-full">
-    <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-primary"></div>
-  </div>
-);
 
 export default function GalleryPage() {
   const [showBox, setShowBox] = useState(true);
   const [walletAddress, setWalletAddress] = useState('');
   const [nfts, setNfts] = useState<any>([]);
-  const [loading, setLoading] = useState(false);  // For loader state
-  const [error, setError] = useState<string | null>(null);  // For error state
+  const [loading, setLoading] = useState(false);
   const [selection, setSelection] = useState("2D")
 
+  const isValidAddress = (address: string) => {
+    // Solana public addresses are typically 44 characters long and use Base58 characters
+    const solanaAddressRegex = /^[1-9A-HJ-NP-Za-km-z]{32,44}$/;
+    return solanaAddressRegex.test(address);
+  };
+
   const fetchNFT = async () => {
+
+    if (!walletAddress) {
+      toast.warning('Please fill in the public address to continue');
+      return;
+    }
+
+    if (!isValidAddress(walletAddress.trim())) {
+      toast.error('Invalid public address. Please check and try again.');
+      return;
+    }
     setLoading(true);
-    setError(null);
-    // try {
-    const response: any = await fetchNFTs(walletAddress);
+    const response: any = await fetchNFTs(walletAddress.trim());
     if (response.length === 0) {
-      setError("No NFTs found.");
+      toast.error('No NFTs found for this address');
     } else {
       setNfts(response);
     }
     setLoading(false);
-    // } catch (err) {
-    //   setError("An error occurred while fetching NFTs.");
-    // } finally {
-    //   setLoading(false);
-    // }
   }
 
   return (
-    <main className="h-screen max-w-[1280px] mx-auto relative overflow-hidden w-full">
+    <main className="h-screen max-w-[1280px] mx-auto px-4 relative overflow-hidden w-full">
       <h1 className="my-4 font-heading font-bold text-3xl">Gallery ({nfts.length})</h1>
       {
         nfts.length > 0 ? (
@@ -73,40 +75,46 @@ export default function GalleryPage() {
       }
       {/* <BottomNav /> */}
       <div
-        className={`absolute left-0 right-0 bottom-0 p-4 shadow-lg transition-all duration-300 max-w-[600px] mx-auto w-full sm:w-auto ${showBox ? "translate-y-0 opacity-100" : "translate-y-full opacity-0 pointer-events-none"
-          }`}
+        className={`absolute flex flex-col gap-4 md:flex-row items-center justify-between left-0  right-0 bottom-0 p-4 shadow-lg  mx-auto w-full sm:w-auto `}
       >
-        <div className="flex items-center gap-4">
+        <div className=" flex-1 hidden md:block z-10">
+          <Toggle variant="outline" aria-label="Toggle NFT box" onClick={() => setShowBox((prev) => !prev)}>
+            <SquareChevronDownIcon className="h-5 w-5" />
+          </Toggle>
+        </div>
+
+        <div className={`flex justify-center w-full md:w-[600px]  flex-1 transition-all duration-300 items-center gap-4 ${showBox ? "translate-y-0 opacity-100" : "translate-y-full opacity-0 pointer-events-none"
+          }`}>
           <Input
             type="text"
-            placeholder="Enter NFT ID"
+            placeholder="Enter public address"
             onChange={(e) => setWalletAddress(e.target.value)}
-            className="flex-1 rounded-md border border-input bg-background px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-primary"
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                fetchNFT();
+              }
+            }}
+            className="w-full md:w-[300px] rounded-md border border-input bg-background px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-primary"
           />
           <Button onClick={fetchNFT} disabled={loading}>
             {loading ? <Loader2 className="animate-spin" /> : 'Fetch NFTs'}
           </Button>
         </div>
-        {error && <p className="text-red-500 mt-2">{error}</p>}
+        <div className=" flex-1 flex items-center justify-end w-full md:w-auto z-10">
+          <Select value={selection} onValueChange={setSelection}>
+            <SelectTrigger className="w-full md:w-[180px]">
+              <SelectValue placeholder="Select View" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectItem value="2D">2D View</SelectItem>
+                <SelectItem value="3D">3D View</SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </div>
       </div>
-      <div className="absolute bottom-4 left-4 z-10">
-        <Toggle variant="outline" aria-label="Toggle NFT box" onClick={() => setShowBox((prev) => !prev)}>
-          <SquareChevronDownIcon className="h-5 w-5" />
-        </Toggle>
-      </div>
-      <div className="absolute bottom-4 right-4 z-10">
-        <Select value={selection} onValueChange={setSelection}>
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Select View" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectItem value="2D">2D View</SelectItem>
-              <SelectItem value="3D">3D View</SelectItem>
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-      </div>
+
     </main>
   )
 }

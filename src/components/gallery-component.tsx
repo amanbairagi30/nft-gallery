@@ -24,7 +24,7 @@ const GalleryComponent = ({ nfts }: { nfts: string[] }) => {
                     loop={true}
                     effect={"coverflow"}
                     grabCursor={true}
-                    slidesPerView={3}
+                    slidesPerView={1}
                     coverflowEffect={{
                         rotate: 50,
                         stretch: 0,
@@ -33,6 +33,14 @@ const GalleryComponent = ({ nfts }: { nfts: string[] }) => {
                         slideShadows: true,
                     }}
                     modules={[EffectCoverflow, Autoplay]}
+                    breakpoints={{
+                        640: {
+                            slidesPerView: "auto", // Auto slides per view on mobile and tablets
+                        },
+                        1024: {
+                            slidesPerView: 3, // 3 slides per view on larger screens
+                        },
+                    }}
                     className="mySwiper"
                 >
                     {/* Multiple SwiperSlides with the same image */}
